@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Love Calculator</title>
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-image: url("assets/heart_bg.jpg");
+        background-size: cover;
+        height: 100vh;
+      }
+
+      .header {
+        font-size: 54px;
+        margin-bottom: 50px;
+        color: blue;
+      }
+
+      .form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: lightpink;
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      input[type="text"] {
+        padding: 10px;
+        font-size: 20px;
+        margin-bottom: 20px;
+      }
+
+      button[type="submit"] {
+        padding: 10px 20px;
+        font-size: 20px;
+        background-color: hotpink;
+        border-radius: 10px;
+        border: none;
+        color: white;
+      }
+
+      .result {
+        font-size: 36px;
+        margin-top: 50px;
+        text-align: center;
+        animation: love-animation 3s ease-in-out infinite;
+      }
+
+      @keyframes love-animation {
+        0% {
+          transform: translateY(-10px);
+        }
+        50% {
+          transform: translateY(10px);
+        }
+        100% {
+          transform: translateY(-10px);
+        }
+      }
+
+      .result.high-percentage {
+        background-color: green;
+        color: white;
+      }
+
+      .result.low-percentage {
+        background-color: red;
+        color: white;
+      }
+
+      .heart-icon {
+        position: absolute;
+        top: 300px;
+        right: 100px;
+        width: 300px;
+        height: 300px;
+        animation: heart-icon-animation 3s ease-in-out infinite;
+      }
+
+      @keyframes heart-icon-animation {
+        0% {
+          transform: scale(1);
+        }
+        20% {
+          transform: scale(1.5);
+        }
+        40% {
+          transform: scale(1);
+        }
+      }
+
+      .heart-break-icon {
+        position: absolute;
+        top: 300px;
+        right: 100px;
+        width: 300px;
+        height: 300px;
+        animation: heart-break-icon-animation 3s ease-in-out infinite;
+      }
+
+      @keyframes heart-break-icon-animation {
+        0% {
+          transform: rotate(0deg);
+        }
+        20% {
+          transform: rotate(45deg);
+        }
+        40% {
+          transform: rotate(0deg);
+        }
+      }
+      img {
+        max-width: 100%;
+        max-height: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="heart-icon" id="heart-icon" style="display: none">
+        <img src="assets/heart.png" alt="Heart Icon" />
+      </div>
+      <div class="heart-break-icon" id="heart-break-icon" style="display: none">
+        <img src="assets/broken-heart.png" alt="Heart Break Icon" />
+      </div>
+
+      <div class="header">Love Calculator</div>
+      <form class="form">
+        <input type="text" placeholder="Your Name" id="person1" />
+        <input type="text" placeholder="Partner's Name" id="person2" />
+        <button type="submit" onclick="calculateLove(); return false;">
+          Calculate
+        </button>
+      </form>
+      <div class="result" id="result"></div>
+    </div>
+
+    <script>
+      function calculateLove() {
+        const person1 = document.getElementById("person1").value;
+        const person2 = document.getElementById("person2").value;
+
+        if (!person1 || !person2) {
+          alert("Please enter both names");
+          return;
+        }
+
+        const lovePercentage = Math.floor(Math.random() * 100) + 1;
+
+        document.getElementById(
+          "result"
+        ).innerHTML = `${person1} & ${person2}'s love percentage is ${lovePercentage}%`;
+
+        if (lovePercentage > 50) {
+          document.getElementById("result").classList.remove("low-percentage");
+          document.getElementById("result").classList.add("high-percentage");
+          document.getElementById("heart-icon").style.display = "block";
+          document.getElementById("heart-break-icon").style.display = "none";
+        } else {
+          document.getElementById("result").classList.add("low-percentage");
+          document.getElementById("result").classList.remove("high-percentage");
+          document.getElementById("heart-icon").style.display = "none";
+          document.getElementById("heart-break-icon").style.display = "block";
+        }
+      }
+    </script>
+  </body>
+</html>
